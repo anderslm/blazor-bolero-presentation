@@ -1,0 +1,9 @@
+# From C# to F#
+
+---
+Let's look at some C# code and convert it to F# in some small steps.
+
+---
+```c#
+string hej = "hej";
+```

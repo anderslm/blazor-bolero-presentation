@@ -20,8 +20,7 @@ type Startup() =
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie()
                 .Services
-            .AddRemoting<BookService>()
-            .AddRemoting<LoginService>()
+            .AddRemoting<PresentationService>()
             .AddBoleroHost()
         |> ignore
 

@@ -5,9 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Login.fs" />
-        <Compile Include="Books.fs" />
-        <Compile Include="Counting.fs" />
+        <Compile Include="Presentation.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>
 

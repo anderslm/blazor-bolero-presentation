@@ -1,0 +1,12 @@
+# What is F#
+
+---
+Microsoft developed functional language for the .NET platform. It's invented by Done Syme - se him live at NDC this year :)
+
+---
+F# is:
+* Immutable
+* Functional first
+* Free from boilerplate
+* Statically typed
+* Type inferred
