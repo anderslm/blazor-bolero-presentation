@@ -1,0 +1,35 @@
+# What is Blazor
+
+---
+Blazor is both a framework and a compiler.
+
+---
+## The framework
+Allows you to create web applications using Razor views:
+```c#
+@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+```
+
+## The compiler
+Compiles .NET code into WebAssembly which can run directly in the browser, completely removing the need for JavaScript and nodejs.
+
+You can use the compiler by specifying it in the project file:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+```

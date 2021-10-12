@@ -13,6 +13,7 @@ let router = Router.infer SetPage (fun model -> model.page)
 type MainTemplate = Template<"wwwroot/main.html">
 
 let view model dispatch =
+    List.map
     MainTemplate()
         .Body(
             Presentation.view model.presentationModel (PresentationMsg >> dispatch)

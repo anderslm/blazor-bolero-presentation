@@ -6,6 +6,12 @@
   <ItemGroup>
     <Content Include="Presentation\1.markdown" />
     <Content Include="Presentation\2.markdown" />
+    <Content Include="Presentation\3.markdown" />
+    <Content Include="Presentation\4.markdown" />
+    <Content Include="Presentation\5.markdown" />
+    <Content Include="Presentation\6.markdown" />
+    <Content Include="Presentation\7.markdown" />
+    <Content Include="Presentation\8.markdown" />
     <Compile Include="PresentationService.fs" />
     <Compile Include="Startup.fs" />
   </ItemGroup>

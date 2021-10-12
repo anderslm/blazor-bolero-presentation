@@ -31,9 +31,7 @@ let view model dispatch =
             | Option.None ->
                 empty
             | Some markdown ->
-                RawHtml <| Markdig.Markdown.ToHtml(markdown, pipeline))
-        .PrevPageNumber(model.pageNumber - 1 |> string)
-        .NextPageNumber(model.pageNumber + 1 |> string)
+                RawHtml <| Markdown.ToHtml(markdown, pipeline))
         .PrevPage(fun _ -> dispatch PrevPage)
         .NextPage(fun _ -> dispatch NextPage)
         .Elt()

@@ -4,6 +4,114 @@
 Let's look at some C# code and convert it to F# in some small steps.
 
 ---
+
+## First step
 ```c#
-string hej = "hej";
+using System;
+using System.Linq;
+
+namespace Users
+{
+    public record User(string Name, DateTime Birthday, int Age);
+    
+    public static class UserService
+    {
+        public List<string> GetNames(List<User> users)
+        {
+            return users.Select(u => u.Name).ToList();
+        }
+    }
+} 
+```
+---
+## Second step
+`namespace` to `module` and `using` to `open`
+```c#
+module Users
+
+open System
+open System.Linq
+
+public record User(string Name, DateTime Birthday, int Age);
+
+public static class UserService
+{
+    public List<string> GetNames(List<User> users)
+    {
+        return users.Select(u => u.Name).ToList();
+    }
+}
+```
+---
+## Third step
+Convert `C#` record into `F#` record
+```c#
+module Users
+
+open System
+open System.Linq
+
+type User = 
+    { Name : string
+      Birthday : DateTime
+      Age : int }
+
+public static class UserService
+{
+    public List<string> GetNames(List<User> users)
+    {
+        return users.Select(u => u.Name).ToList();
+    }
+} 
+```
+---
+## Fourth step
+Convert function without the `static class`
+```f#
+module Users
+
+open System
+open System.Linq
+
+type User = 
+    { Name : string
+      Birthday : DateTime
+      Age : int }
+
+let GetNames users =
+    users.Select(fun u -> u.Name).ToList()
+```
+---
+## Finally
+Use `F#` libraries instead of `Linq`
+```f#
+module Users
+
+open System
+open Microsoft.FSharp.Collections
+
+type User = 
+    { Name : string
+      Birthday : DateTime
+      Age : int }
+
+let GetNames users =
+    users
+    |> List.map (fun u -> u.Name)
+```
+---
+## Encore
+Make it 'point free'
+```f#
+module Users
+
+open System
+open Microsoft.FSharp.Collections
+
+type User = 
+    { Name : string
+      Birthday : DateTime
+      Age : int }
+
+let GetNames = List.map (fun u -> u.Name)
 ```

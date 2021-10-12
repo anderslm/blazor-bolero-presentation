@@ -1,0 +1,48 @@
+# View
+
+---
+The view is probably what backend developers hate the most. It's dynamically typed and 
+messy. Well - Bolero fixes that in by providing two alternatives.
+
+---
+
+## Html api
+Instead of writing traditionally HTML, Bolero provides a typed api that you can use instead.
+
+Consider this HTML:
+```html
+<h1>Hi</h1>
+<p>Hello, world!</p>
+```
+Can be written in a `view` function like this instead:
+```f#
+open Bolero.Html
+
+let view = [
+        h1 [] [ text "Hi" ]
+        p [] [ text "Hello, world!" ]
+    ] |> concat
+```
+
+## Html type provider
+But even more interesting Bolero has created a 'type provider' for HTML, which can be used as a 
+statically typed templating system.
+
+When writing HTML templates we define 'holes' that is filled by the view function.
+
+Consider this HTML template in a file called `my-template.html`:
+```html
+<h1>Hi</h1>
+<p>${Name}</p>
+```
+Can be used in a view function like this:
+```f#
+open Bolero.Template
+
+type HiTemplate = Template<"my-template.html">
+
+let view =
+    HiTemplate.Name("Anders").Elt()
+```
+Notice that `HiTemplate` is a type. The type provider generates types based on the HTML
+at design time giving intellisense and compile time security.

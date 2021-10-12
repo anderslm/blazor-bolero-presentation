@@ -1,0 +1,79 @@
+# Book store application
+
+Consider a book store application where a customer can buy books and be given a discount if the have a promotion code.
+
+## Model
+
+The model is just a record type with the required data to run the application - or parts of it.
+
+It could look like this:
+```f#
+type Model = 
+    { books : Book list
+      cart : Book list
+      promotionCode : PromotionCode option
+      receipt : Receipt option }
+    
+and Book = 
+    { title : string
+      price : double }
+      
+and Receipt = Receipt of string
+
+and PromotionCode = PromotionCode of string 
+```
+
+* There is a number of books that are available in the store 
+* The customer can put books in their cart 
+* If the customer has a promotion code they can enter it to get a discount
+* After payment the customer receives a receipt
+
+## Messages
+
+The messages are all that can happen. In `F#` we can use a discriminated union to represent it. A discriminated union, or sum type, is like an `enum` just much more powerful.
+
+It could look like this:
+```f#
+type Message =
+    | PutBookInCart of Book
+    | RemoveBookFromCart of Book
+    | EnterPromotionCode of string
+    | Pay of double
+    | Payed of double
+```
+
+## Commands
+
+We know that we have to affect the world around us and we can model those effects as well:
+```f#
+type Commands =
+    | PayWithCreditCard of (double * Message)
+    | Print of Receipt
+    | None
+```
+
+Now we can construct the `update` function.
+
+## Update
+
+Update is a function that given a `model` and `message` can calculate a new `model` and generate a `command`.
+```f#
+let update model message =
+    match message with
+    | PutBookInCart book ->
+        { model with cart = book :: model.cart }
+        , None
+    | RemoveBookFromCart book ->
+        { model with cart = model.cart |> List.filter (fun b -> b <> book) }
+        , None
+    | EnterPromotionCode code ->
+        { model with promotionCode = Some <| PromotionCode code } 
+        , None
+    | Pay amount ->
+        model, PayWithCreditCard (amount, (Payed amount))
+    | Payed amount ->
+        { model with
+            cart = []
+            receipt = sprintf "Thank you for your purchase of %A" amount |> Receipt |> Some }
+        , None
+```

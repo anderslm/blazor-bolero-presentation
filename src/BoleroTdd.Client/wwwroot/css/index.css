@@ -34,6 +34,10 @@ h1 {
   font-size: 38px;
 }
 
+h2 {
+  font-size: 28px;
+}
+
 ul {
   list-style: initial;
 }
@@ -46,6 +50,19 @@ p, li {
   text-align: center;
 }
 
+.main {
+  overflow: auto;
+  height: 90vh;
+}
+
 .is-one-fifth {
   margin: auto;
+}
+
+pre {
+  text-align: left;
+}
+
+img {
+  height: 400px;
 }

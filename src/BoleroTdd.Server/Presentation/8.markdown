@@ -1,0 +1,14 @@
+# Finally
+
+---
+Now I wrote this presentation yesterday - and just as an exercise I wrote it in
+Bolero.
+
+---
+
+My one-day presentation software supports:
+* Markdown files
+* Code highlighting
+* Navigation
+---
+**Lets go through the application together - if we have time to do so**

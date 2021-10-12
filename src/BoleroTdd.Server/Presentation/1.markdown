@@ -10,3 +10,4 @@ F# is:
 * Free from boilerplate
 * Statically typed
 * Type inferred
+* No nulls

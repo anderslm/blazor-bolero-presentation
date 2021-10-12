@@ -1,5 +1,6 @@
 namespace BoleroTddTemplate.Server
 
+open System
 open System.IO
 open Microsoft.AspNetCore.Hosting
 open Bolero.Remoting
@@ -12,6 +13,10 @@ type PresentationService(ctx: IRemoteContext, env: IWebHostEnvironment) =
     override this.Handler =
         {
             getPresentation = fun pageNumber -> async {
-                return Path.Combine(env.ContentRootPath, "Presentation/" + pageNumber.ToString() + ".markdown") |> File.ReadAllText
+                try
+                    return Path.Combine(env.ContentRootPath, "Presentation/" + pageNumber.ToString() + ".markdown") |> File.ReadAllText
+                with
+                | _ ->
+                    return String.Empty
             }
         }

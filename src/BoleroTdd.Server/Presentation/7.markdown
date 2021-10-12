@@ -1,0 +1,52 @@
+# Backend
+
+---
+As both the frontend and the backend is written in .NET, Bolero can automatically handle
+http calls to the backend. No need to explicitly write a REST Api or something similar. 
+Bolero gives compile time security that all backend calls are valid.
+
+---
+
+## Frontend service contract
+The frontend code defines a contract that the backend implements.
+
+Like this:
+```f#
+module Client.Users
+
+type User = 
+    { Id : int 
+      Name : string }
+
+type Service =
+    { getUser: int -> Async<User> }
+
+    interface IRemoteService with
+        member this.BasePath = "/users"
+```
+
+## Backend implement contract
+The backend then have to provide an implementation of the service.
+
+Like this:
+```f#
+type UserService(ctx: IRemoteContext, env: IWebHostEnvironment) =
+    inherit RemoteHandler<Client.Users.Service>()
+
+    override this.Handler =
+        {
+            getUser = fun userId -> async {
+                // Fetch from database or something other than a hardcoded value
+                return 
+                    { Id = 1
+                      Name = "Anders" }
+            }
+        }
+
+```
+
+This makes calling the backend as simple as calling a function:
+```f#
+let getUserFromBackend service id =
+    service.getUser id
+```

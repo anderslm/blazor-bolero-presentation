@@ -1,0 +1,22 @@
+# What is Bolero
+
+---
+Bolero is a framework that uses the Blazor compiler.
+
+---
+Bolero uses the architecture known as `Model-View-Update` (MVU) or `React Architechture` or `Elm Architechture`.
+
+![MVU](https://qiita-user-contents.imgix.net/https%3A%2F%2Fprogramming-elm.com%2Fimg%2Felm-architecture.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&s=1c6e74c4c3db9d3a1c4f2e7b56bccd62)
+
+It's important to note that MVU is effect free or 'pure'. That means that there is no side effects. A side effect is an effect in the real world (or to shared memory).
+
+In order to affect the world the `update` function returns both a new model and also a command to do something. It could be reading from a http api, a database, a file or something similar. 
+
+## Model
+The state of the program. That means all data that is required to render the web application in some state.
+## View
+The `HTML` and `CSS` that is rendered in the browser. 
+## Messages
+Things that happen. If you press a button, enter some text or otherwise interacts with the program.
+## Update
+Updates the model when a message is fired.
